@@ -142,7 +142,7 @@ const resolveTemplateRoot = (templateRoot, mode) => {
 
 const showHelp = () => {
   process.stdout.write(
-    `rapidcli\n\nUsage:\n  rapidcli list-presets\n  rapidcli init <project-name> [--preset enterprise-dashboard]\n\nFlags:\n  --preset <id>         Preset id (default: enterprise-dashboard)\n  --output <path>       Output directory parent (default: current working directory)\n  --deployment <id>     Deployment target to record in the blueprint\n  --skip-deployment     Record no deployment target and skip the deployment prompt\n  --allow-community     Allow presets marked as community source\n  --help                Show this message\n`,
+    `rapidcraft\n\nUsage:\n  rapidcraft list-presets\n  rapidcraft init <project-name> [--preset enterprise-dashboard]\n\nFlags:\n  --preset <id>         Preset id (default: enterprise-dashboard)\n  --output <path>       Output directory parent (default: current working directory)\n  --deployment <id>     Deployment target to record in the blueprint\n  --skip-deployment     Record no deployment target and skip the deployment prompt\n  --allow-community     Allow presets marked as community source\n  --help                Show this message\n`,
   );
 };
 

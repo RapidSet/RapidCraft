@@ -1,6 +1,6 @@
 {
   "branches": ["main"],
-  "tagFormat": "rapidcli-v${version}",
+  "tagFormat": "rapidcraft-v${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",

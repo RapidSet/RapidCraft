@@ -2,7 +2,7 @@
 
 Enterprise-first JSON blueprint scaffolding CLI for RapidKit.
 
-![rapidcraft logo](./rapidcli.svg)
+![rapidcraft logo](./rapidcraft.svg)
 
 ## Usage
 
