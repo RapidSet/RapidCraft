@@ -1,10 +1,10 @@
 {
-  "name": "rapidcli",
-  "version": "0.1.0",
+  "name": "rapidcraft",
+  "version": "0.1.2",
   "private": false,
   "type": "module",
   "bin": {
-    "rapidcli": "src/index.mjs"
+    "rapidcraft": "src/index.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -40,6 +40,14 @@
     "*.{json,md,yml,yaml}": "prettier --write"
   },
   "description": "Enterprise-first JSON blueprint scaffolding CLI for RapidKit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RapidSet/RapidCli.git"
+  },
+  "homepage": "https://github.com/RapidSet/RapidCli#readme",
+  "bugs": {
+    "url": "https://github.com/RapidSet/RapidCli/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",

@@ -2,20 +2,20 @@
 
 Enterprise-first JSON blueprint scaffolding CLI for RapidKit.
 
-![rapidcli logo](./rapidcli.svg)
+![rapidcli logo](https://raw.githubusercontent.com/RapidSet/RapidCli/main/rapidcli.svg)
 
 ## Usage
 
-- npx rapidcli@latest init my-app --preset enterprise-dashboard
-- pnpm dlx rapidcli@latest init my-app --preset operations-console
-- npx rapidcli@latest init my-app --preset enterprise-dashboard --deployment netlify
-- npx rapidcli@latest init my-app --preset operations-console --deployment kubernetes
-- npx rapidcli@latest init my-app --preset enterprise-dashboard --skip-deployment
+- npx rapidcraft@latest init my-app --preset enterprise-dashboard
+- pnpm dlx rapidcraft@latest init my-app --preset operations-console
+- npx rapidcraft@latest init my-app --preset enterprise-dashboard --deployment netlify
+- npx rapidcraft@latest init my-app --preset operations-console --deployment kubernetes
+- npx rapidcraft@latest init my-app --preset enterprise-dashboard --skip-deployment
 
 ## Commands
 
-- rapidcli list-presets
-- rapidcli init <project-name> [--preset <id>] [--output <path>] [--deployment <target>] [--skip-deployment]
+- rapidcraft list-presets
+- rapidcraft init <project-name> [--preset <id>] [--output <path>] [--deployment <target>] [--skip-deployment]
 
 ## Output Model
 
