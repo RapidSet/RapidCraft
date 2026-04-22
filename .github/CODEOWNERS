@@ -1,0 +1,19 @@
+# Global ownership
+
+- @RapidSet
+
+# CLI source and templates
+
+/src/ @RapidSet
+/templates/ @RapidSet
+
+# Contracts and presets
+
+/contracts/ @RapidSet
+/presets/ @RapidSet
+
+# Tooling and release configuration
+
+/package.json @RapidSet
+/pnpm-lock.yaml @RapidSet
+/.github/workflows/ @RapidSet
