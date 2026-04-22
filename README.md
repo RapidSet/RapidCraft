@@ -4,20 +4,59 @@ Enterprise-first JSON blueprint scaffolding CLI for RapidKit.
 
 ![rapidcraft logo](https://raw.githubusercontent.com/RapidSet/RapidCraft/main/rapidcraft.svg)
 
-## Usage
+`rapidcraft` scaffolds JSON blueprint manifests from curated presets.
 
-- npx rapidcraft@latest init my-app --preset enterprise-dashboard
-- pnpm dlx rapidcraft@latest init my-app --preset operations-console
-- npx rapidcraft@latest init my-app --preset enterprise-dashboard --deployment netlify
-- npx rapidcraft@latest init my-app --preset operations-console --deployment kubernetes
-- npx rapidcraft@latest init my-app --preset enterprise-dashboard --skip-deployment
+## Quick Start
+
+Run directly with your package runner:
+
+```bash
+npx rapidcraft@latest list-presets
+npx rapidcraft@latest init my-app --preset enterprise-dashboard
+```
+
+or:
+
+```bash
+pnpm dlx rapidcraft@latest init my-app --preset operations-console
+```
 
 ## Commands
 
-- rapidcraft list-presets
-- rapidcraft init <project-name> [--preset <id>] [--output <path>] [--deployment <target>] [--skip-deployment]
+- `rapidcraft list-presets`
+  Lists all available presets from the packaged contracts index.
 
-## Output Model
+- `rapidcraft init <project-name> [options]`
+  Creates a blueprint folder for the selected preset.
+
+## Options
+
+- `--preset <id>`
+  Preset id to scaffold. Default: `enterprise-dashboard`
+
+- `--output <path>`
+  Parent directory for the generated project. Default: current working directory
+
+- `--deployment <target>`
+  Deployment target to record in the blueprint (must be one of the preset-supported options)
+
+- `--skip-deployment`
+  Records no deployment target and skips the deployment prompt
+
+- `--allow-community`
+  Allows presets marked as community source
+
+- `--help`
+  Shows command help
+
+## Presets
+
+- `enterprise-dashboard`
+- `operations-console`
+
+Use `rapidcraft list-presets` to view the current packaged set.
+
+## What Gets Generated
 
 - Presets scaffold JSON blueprint manifests only.
 - Generated projects are intended for AI/MCP-driven implementation workflows.
@@ -25,47 +64,11 @@ Enterprise-first JSON blueprint scaffolding CLI for RapidKit.
 - Blueprint manifests record deployment target selection for downstream materialization.
 - Container-based targets record a required multi-stage Docker build strategy.
 
-## Contributing
+## Requirements
 
-### Setup
+- Node.js `>=20.19.0` or `>=22.12.0`
 
-1. Install dependencies:
+## Source
 
-```bash
-pnpm install
-```
-
-2. Ensure git hooks are installed:
-
-```bash
-pnpm prepare
-```
-
-### Local Quality Checks
-
-Run these before opening a PR:
-
-```bash
-pnpm lint
-pnpm format:check
-pnpm check
-```
-
-To auto-fix formatting and lint issues:
-
-```bash
-pnpm lint:fix
-pnpm format
-```
-
-### Commit Convention
-
-This repository enforces Conventional Commits through a commit-msg hook.
-
-Examples:
-
-- feat: add deployment target validation
-- fix: handle missing preset contract
-- docs: clarify scaffold output model
-
-Invalid commit messages are rejected automatically.
+- Repository: https://github.com/RapidSet/RapidCraft
+- Issues: https://github.com/RapidSet/RapidCraft/issues
