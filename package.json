@@ -4,8 +4,7 @@
   "private": false,
   "type": "module",
   "bin": {
-    "rapidcli": "src/index.mjs",
-    "rapidkit": "src/index.mjs"
+    "rapidcli": "src/index.mjs"
   },
   "publishConfig": {
     "access": "public"
