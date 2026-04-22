@@ -42,11 +42,11 @@
   "description": "Enterprise-first JSON blueprint scaffolding CLI for RapidKit",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RapidSet/RapidCli.git"
+    "url": "git+https://github.com/RapidSet/RapidCraft.git"
   },
-  "homepage": "https://github.com/RapidSet/RapidCli#readme",
+  "homepage": "https://github.com/RapidSet/RapidCraft#readme",
   "bugs": {
-    "url": "https://github.com/RapidSet/RapidCli/issues"
+    "url": "https://github.com/RapidSet/RapidCraft/issues"
   },
   "license": "MIT",
   "devDependencies": {

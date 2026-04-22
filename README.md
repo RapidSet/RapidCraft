@@ -1,8 +1,8 @@
-# rapidcli
+# rapidcraft
 
 Enterprise-first JSON blueprint scaffolding CLI for RapidKit.
 
-![rapidcli logo](https://raw.githubusercontent.com/RapidSet/RapidCli/main/rapidcli.svg)
+![rapidcraft logo](./rapidcli.svg)
 
 ## Usage
 
