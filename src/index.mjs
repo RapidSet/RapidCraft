@@ -2,6 +2,7 @@
 import path from "node:path";
 import process from "node:process";
 import readline from "node:readline/promises";
+import { spawnSync } from "node:child_process";
 import { getPresetById, listPresets } from "./lib/contracts.mjs";
 import { resolveContractsIndexPath } from "./lib/paths.mjs";
 import { scaffoldProject } from "./lib/scaffold.mjs";
@@ -16,6 +17,53 @@ const getArgValue = (flag) => {
     return null;
   }
   return args[flagIndex + 1];
+};
+
+const SUPPORTED_PACKAGE_MANAGERS = new Set(["npm", "pnpm", "yarn"]);
+
+const detectPackageManagerFromUserAgent = () => {
+  const userAgent = process.env.npm_config_user_agent ?? "";
+
+  if (userAgent.startsWith("pnpm/")) {
+    return "pnpm";
+  }
+
+  if (userAgent.startsWith("yarn/")) {
+    return "yarn";
+  }
+
+  return "npm";
+};
+
+const resolvePackageManager = () => {
+  const requested = getArgValue("--package-manager");
+  if (!requested) {
+    return detectPackageManagerFromUserAgent();
+  }
+
+  if (!SUPPORTED_PACKAGE_MANAGERS.has(requested)) {
+    process.stderr.write(
+      `Unsupported package manager '${requested}'. Supported values: npm, pnpm, yarn\n`,
+    );
+    process.exit(1);
+  }
+
+  return requested;
+};
+
+const installScaffoldDependencies = ({ targetDir, packageManager }) => {
+  process.stdout.write(`Installing dependencies with ${packageManager} in ${targetDir}...\n`);
+
+  const result = spawnSync(packageManager, ["install"], {
+    cwd: targetDir,
+    stdio: "inherit",
+  });
+
+  if (result.status !== 0) {
+    throw new Error(
+      `Dependency installation failed using ${packageManager} (exit code ${result.status ?? "unknown"}).`,
+    );
+  }
 };
 
 const TEMPLATE_ROOT_PREFIX = "packages/create-rapidkit/";
@@ -142,7 +190,7 @@ const resolveTemplateRoot = (templateRoot, mode) => {
 
 const showHelp = () => {
   process.stdout.write(
-    `rapidcraft\n\nUsage:\n  rapidcraft list-presets\n  rapidcraft init <project-name> [--preset enterprise-dashboard]\n\nFlags:\n  --preset <id>         Preset id (default: enterprise-dashboard)\n  --output <path>       Output directory parent (default: current working directory)\n  --deployment <id>     Deployment target to record in the blueprint\n  --skip-deployment     Record no deployment target and skip the deployment prompt\n  --allow-community     Allow presets marked as community source\n  --help                Show this message\n`,
+    `rapidcraft\n\nUsage:\n  rapidcraft list-presets\n  rapidcraft init <project-name> [--preset enterprise-dashboard]\n\nFlags:\n  --preset <id>         Preset id (default: enterprise-dashboard)\n  --output <path>       Output directory parent (default: current working directory)\n  --deployment <id>     Deployment target to record in the blueprint\n  --package-manager <id> Package manager for dependency install: npm, pnpm, or yarn\n  --skip-install        Skip dependency installation after scaffold generation\n  --skip-deployment     Record no deployment target and skip the deployment prompt\n  --allow-community     Allow presets marked as community source\n  --help                Show this message\n`,
   );
 };
 
@@ -171,6 +219,8 @@ const runInit = async () => {
 
   const presetId = getArgValue("--preset") ?? "enterprise-dashboard";
   const outputRoot = getArgValue("--output") ?? process.cwd();
+  const packageManager = resolvePackageManager();
+  const skipInstall = hasFlag("--skip-install");
 
   const preset = getPresetById(presetId);
   if (!preset) {
@@ -207,8 +257,19 @@ const runInit = async () => {
     },
   });
 
+  if (!skipInstall) {
+    installScaffoldDependencies({
+      targetDir,
+      packageManager,
+    });
+  }
+
   process.stdout.write(
-    `Scaffolded '${projectName}' using preset '${preset.contract.id}' at ${targetDir} with deployment target '${deploymentTarget}'\n`,
+    `Scaffolded '${projectName}' using preset '${preset.contract.id}' at ${targetDir} with deployment target '${deploymentTarget}'.\n`,
+  );
+
+  process.stdout.write(
+    `Use '${packageManager} run mcp:start' from ${targetDir} to start the RapidMCP server for this project.\n`,
   );
 };
 

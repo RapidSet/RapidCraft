@@ -37,6 +37,12 @@ pnpm dlx rapidcraft@latest init my-app --preset operations-console
 - `--output <path>`
   Parent directory for the generated project. Default: current working directory
 
+- `--package-manager <id>`
+  Package manager used for post-scaffold dependency installation (`npm`, `pnpm`, `yarn`).
+
+- `--skip-install`
+  Skips post-scaffold dependency installation.
+
 - `--deployment <target>`
   Deployment target to record in the blueprint (must be one of the preset-supported options)
 
@@ -58,9 +64,14 @@ Use `rapidcraft list-presets` to view the current packaged set.
 
 ## What Gets Generated
 
-- Presets scaffold JSON blueprint manifests only.
+- Presets scaffold a blueprint manifest and a minimal project package manifest.
 - Generated projects are intended for AI/MCP-driven implementation workflows.
 - No React application code is scaffolded by default.
+- `package.json` includes `@rapidset/rapidkit` and `@rapidset/rapidmcp` dependencies.
+- `package.json` includes root scripts:
+  - `mcp:start` to launch rapidmcp using the scaffold root as workspace root
+  - `mcp:help` to display rapidmcp help
+- By default, `rapidcraft init` installs dependencies after scaffold generation.
 - Blueprint manifests record deployment target selection for downstream materialization.
 - Container-based targets record a required multi-stage Docker build strategy.
 
