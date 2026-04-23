@@ -28,9 +28,11 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "check": "node ./src/index.mjs list-presets",
-    "prepublishOnly": "npm run check",
-    "release": "semantic-release",
-    "release:dry": "semantic-release --dry-run"
+    "prepublishOnly": "pnpm lint && pnpm format:check && pnpm check",
+    "release": "changeset publish",
+    "release:dry": "changeset status --verbose",
+    "changeset": "changeset",
+    "version-packages": "changeset version"
   },
   "lint-staged": {
     "*.{mjs,js,cjs}": [
@@ -50,20 +52,16 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.25.1",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/github": "^11.0.6",
-    "@semantic-release/npm": "^12.0.2",
-    "@semantic-release/release-notes-generator": "^14.1.0",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
-    "prettier": "^3.5.3",
-    "semantic-release": "^24.2.4"
+    "prettier": "^3.5.3"
   },
   "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf"
 }
