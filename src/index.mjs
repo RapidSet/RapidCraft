@@ -253,6 +253,7 @@ const runInit = async () => {
       '"__DEPLOYMENT_REQUIRES_DOCKER__"': String(requiresDocker),
       __DOCKER_BUILD_STRATEGY__: dockerBuildStrategy,
       __PROJECT_NAME__: projectName,
+      project_name_placeholder: projectName,
       __RAPIDKIT_PRESET_ID__: preset.contract.id,
     },
   });
